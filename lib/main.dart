@@ -6,8 +6,8 @@ import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  const keyApplicationId = 'jIgXjvJR6LtFQuB170EKDGVwatKwWGTz53iulRmK';
-  const keyClientKey = 'E9y3oXBugtW99GYwtoOZFqJ2Quz0vZWLlCHISq4H';
+  const keyApplicationId = 'RTIFDYZPLO5YHDInS8mosk6RJ2StJ0BV96YoO9gQ';
+  const keyClientKey = 'evtSq0c4tJzvthCC71InFAcgLtoTvbdwczKd0LGE';
   const keyParseServerUrl = 'https://parseapi.back4app.com';
 
   await Parse().initialize(keyApplicationId, keyParseServerUrl,
@@ -44,7 +44,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Likhit's Todo List"),
+        title: Text("Sonal's Todo List"),
         backgroundColor: Colors.blueAccent,
         centerTitle: true,
       ),
