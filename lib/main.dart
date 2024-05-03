@@ -1,17 +1,15 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'dart:async';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  const keyApplicationId = 'RTIFDYZPLO5YHDInS8mosk6RJ2StJ0BV96YoO9gQ';
-  const keyClientKey = 'evtSq0c4tJzvthCC71InFAcgLtoTvbdwczKd0LGE';
-  const keyParseServerUrl = 'https://parseapi.back4app.com';
+  final keyApplicationId = 'RTIFDYZPLO5YHDInS8mosk6RJ2StJ0BV96YoO9gQ';
+  final keyClientKey = 'evtSq0c4tJzvthCC71InFAcgLtoTvbdwczKd0LGE';
+  final keyParseServerUrl = 'https://parseapi.back4app.com';
 
   await Parse().initialize(keyApplicationId, keyParseServerUrl,
-      clientKey: keyClientKey, debug: true);
+      clientKey: keyClientKey, autoSendSessionId: true);
 
   runApp(MaterialApp(
     home: Home(),
@@ -51,7 +49,7 @@ class _HomeState extends State<Home> {
       body: Column(
         children: <Widget>[
           Container(
-              padding: EdgeInsets.fromLTRB(17.0, 1.0, 7.0, 1.0),
+              padding: const EdgeInsets.fromLTRB(17.0, 1.0, 7.0, 1.0),
               child: Row(
                 children: <Widget>[
                   Expanded(
@@ -59,15 +57,15 @@ class _HomeState extends State<Home> {
                       autocorrect: true,
                       textCapitalization: TextCapitalization.sentences,
                       controller: todoController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           labelText: "New todo",
                           labelStyle: TextStyle(color: Colors.blueAccent)),
                     ),
                   ),
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        onPrimary: Colors.white,
-                        primary: Colors.blueAccent,
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.blueAccent,
                       ),
                       onPressed: addToDo,
                       child: Text("ADD")),
@@ -105,7 +103,7 @@ class _HomeState extends State<Home> {
                                 //Get Parse Object Values
                                 final varTodo = snapshot.data![index];
                                 final varTitle = varTodo.get<String>('task')!;
-                                final varDone =  varTodo.get<bool>('done')!;
+                                final varDone = varTodo.get<bool>('done')!;
                                 //*************************************
 
                                 return ListTile(
@@ -160,7 +158,9 @@ class _HomeState extends State<Home> {
   }
 
   Future<void> saveTodo(String task) async {
-    final todo = ParseObject('Todo')..set('task', task)..set('done', false);
+    final todo = ParseObject('Todo')
+      ..set('task', task)
+      ..set('done', false);
     await todo.save();
   }
 
